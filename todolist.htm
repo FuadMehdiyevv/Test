@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .hstack {width: 45rem};
+    </style>
+</head>
+<body>
+    <div class="hstack gap-3 py-5 container">
+        <input class="form-control me-auto" type="text" placeholder="Add your item here..." aria-label="Add your item here...">
+        <button type="button" class="btn btn-success">Submit</button>
+    </div>
+        
+    <div id="box"></div>
+
+    <script>
+        const submit = document.querySelector(".btn-success")
+        const input = document.querySelector("input")
+        const box = document.querySelector("#box")
+
+        submit.onclick = function() {
+            if(input.value!='') {
+                box.innerHTML = `
+                        <div class="hstack gap-3 py-2 container">
+                            <input class="form-control me-auto inp" type="text" value="${input.value}">
+                            <button type="button" class="btn btn-outline-success" onclick="submmit(this)">Submit</button>
+                            <div class="vr"></div>
+                            <button type="button" class="btn btn-outline-secondary" onclick="yeniden(this)">Edit</button>
+                            <div class="vr"></div>
+                            <button type="button" class="btn btn-outline-danger" onclick="sil(this)">Delete</button>
+                        </div>
+                    ` + box.innerHTML;
+            }
+            input.value = '';
+            document.querySelector(".inp").readOnly = true
+
+        }
+
+        function sil(line) {
+            line.parentNode.remove()
+        }
+        
+        function submmit(line) {
+            line.parentNode.querySelector("input").readOnly = true
+        }
+
+        function yeniden(line) {
+            line.parentNode.querySelector("input").readOnly = false
+        }
+    </script>
+</body>
+</html>
